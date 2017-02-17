@@ -1,0 +1,17 @@
+include shared/header
+include shared/navbar
+block content
+    h1 #{title}
+    form#formPermissionActions(name="permissionAction",method="post",action="/addPermission/#{resource}/#{client}")
+        div.form-group
+            label.col-sm-2.control-label Actions
+            div#actions.col-sm-10
+                each action in scope.actions
+                    input#Actions(type="checkbox", name="actions",value="#{action}")
+                    span(style="margin-right:10px") #{action}
+        a.btn.btn-default(style="margin-right:5px" href="/addPermission") Back
+        button#btnSubmit.btn.btn-primary(type="submit") submit
+include shared/footer
+//
+   Created by nmu on 08/04/2015.
+

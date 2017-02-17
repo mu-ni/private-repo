@@ -1,0 +1,13 @@
+include ../shared/header
+include ../shared/navbar
+block content
+    h1 #{title}
+    p(style="color:red") #{error}
+    p #{description}
+    form#formSetTokenLT(name="setTokenLT",method="post",action="/token-exp")
+        input#tokenType.form-control(name="tokenType", value="#{type}", style="display:none")
+        input#tokenLT.form-control(name="tokenLT", value="#{lifetime}")
+        input.btn.btn-success(type="submit" value="Set Token Lifetime" style="margin-top:5px")
+//
+   Created by nmu on 19/06/2015.
+

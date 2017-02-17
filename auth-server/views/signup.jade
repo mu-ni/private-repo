@@ -1,0 +1,47 @@
+include shared/header
+div.header Gemalto
+block content
+    form#signupForm.well(name="signupForm",method="post",onSubmit="return checkSignup();",ng-app="angularApp")
+        h1 #{title}
+        hr
+        p(style="color:red") #{error}
+        p(style="color:green") #{message}
+        div.form-group
+            label.control-label.col-sm-2 User Name
+            div.col-sm-10
+                input#username.form-control(type="text",name="username")
+        div.form-group
+            label.control-label.col-sm-2 Password
+            div.col-sm-10
+                input#password.form-control(type="password",name="password")
+        div.form-group
+            label.control-label.col-sm-2 Repeat Password
+            div.col-sm-10
+                input#rePassword.form-control(type="password",name="rePassword")
+        hr
+        div.form-group
+            label.control-label.col-sm-2 Name
+            div.col-sm-10
+                input#name.form-control(name="name")
+        div.form-group
+            label.control-label.col-sm-2 Email
+            div.col-sm-10
+                span.ng-cloak(style="color:red;line-height:34px", ng-show="signupForm.email.$dirty && signupForm.email.$invalid") Email must like ni.mu@gemalto.com.
+                input#email.form-control(type="email", name="email", ng-model="email", required)
+        div.form-group
+            label.control-label.col-sm-2 Country
+            div.col-sm-10
+                select#Country.form-control(name="country")
+                    -var countries=["France","US","UK"]
+                    each country in countries
+                        option #{country}
+        hr
+        div.form-group
+            label.control-label.col-sm-2
+            div.col-sm-10
+                a.btn.btn-default(style="margin-right:5px" href="/") Cancel
+                button.btn.btn-primary(type="submit") Signup
+div.footer Security to be free
+include shared/footer
+//
+   Created by nmu on 18/03/2015.

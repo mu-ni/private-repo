@@ -1,0 +1,38 @@
+include ../shared/header
+include ../shared/navbar
+block content
+    h1 #{title}
+    table.table.table-striped.table-hover
+        tr
+            th #
+            th Name
+            th.hidden-xs User
+            th URL
+            th.hidden-md.hidden-sm.hidden-xs Scope
+            th.hidden-xs Status
+            th Operations
+            //- var titles=["#","Name","User","URL","Scope","Status","Operations"]
+            //each title in titles
+                th(style="padding:3px 10px") #{title}
+        tbody
+            each server, i in serverList
+                form#formResourceServer(name="server",method="post",action="/resource-server/#{server._id}?_method=DELETE")
+                    tr
+                        td #{i+1}
+                        td #{server.serverName}
+                        td.hidden-xs #{server.serverUser}
+                        td #{server.serverUrl}
+                        td.hidden-md.hidden-sm.hidden-xs #{server.scope}
+                        td.hidden-xs #{server.status}
+                        //- var servers=[i+1,server.serverName,server.serverUser,server.serverUrl,server.scope,server.status]
+                        //each server in servers
+                            td #{server}
+                        td
+                            //a.btn.btn-warning(href="/auth-resource-server/#{server.serverName}" style="margin-right:5px") Auth
+                            a.btn.btn-success(href="/resource-server/#{server._id}" style="margin-right:5px") Edit
+                            button#btnSubmit.btn.btn-danger(type="submit" style="margin-right:5px" onclick="return confirm('Are you sure to delete this resource server?');") Delete
+                            //a.btn.btn-danger(href="/resource-server/#{server._id}" onclick="return confirm('Are you sure to delete this permission?');") Delete
+    a.btn.btn-primary(href="/add-resource-server") Add Resource Server
+include ../shared/footer
+//
+   Created by nmu on 01/04/2015.

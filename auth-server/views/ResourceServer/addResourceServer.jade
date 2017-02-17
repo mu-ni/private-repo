@@ -1,0 +1,42 @@
+include ../shared/header
+include ../shared/navbar
+block content
+    h1 #{title}
+    p(style="color:red") #{error}
+    form#formAddResourceServer(name="addResourceServer",method="post",action="/resource-server",onSubmit="return areEmpty();", ng-app="angularApp")
+        div.form-group
+            label.col-sm-2.control-label Resource Server Name
+            div.col-sm-6
+                input#serverName.form-control(name="serverName", placeholder="ResourceServer Name", ng-model="serverName", required)
+            div.col-sm-4
+                span.ng-cloak(style="color:red;line-height:34px", ng-show="addResourceServer.serverName.$dirty && addResourceServer.serverName.$invalid") ResourceServer Name is required.
+        div.form-group
+            label.col-sm-2.control-label Resource Server User
+            div.col-sm-6
+                input#serverUser.form-control(name="serverUser", placeholder="ResourceServer User", ng-model="serverUser", required)
+            div.col-sm-4
+                span.ng-cloak(style="color:red;line-height:34px", ng-show="addResourceServer.serverUser.$dirty && addResourceServer.serverUser.$invalid") ResourceServer User is required.
+        div.form-group
+            label.col-sm-2.control-label Resource Server URL
+            div.col-sm-6
+                input#serverUrl.form-control(name="serverUrl", placeholder="ResourceServer URL", ng-model="serverUrl", required)
+            div.col-sm-4
+                span.ng-cloak(style="color:red;line-height:34px", ng-show="addResourceServer.serverUrl.$dirty && addResourceServer.serverUrl.$invalid") ResourceServer Url is required.
+        div.form-group
+            label.col-sm-2.control-label Scope
+            div.col-sm-10
+                - var scopes = ["uma_protection:resource", "uma_protection:client", "uma_protection:permission"]
+                each scope in scopes
+                    li.list-unstyled(style="float:left; margin-left:10px")
+                        input#Scope(type="checkbox", name="scope",value="#{scope}")
+                        span #{scope}
+        div.form-group
+            label.col-sm-2.control-label Status
+            div.col-sm-10
+                input#checkStatus(type="checkbox" name="status" value="true" checked="checked")
+        a.btn.btn-default(style="margin-right:5px" href="/resource-server") Cancel
+        button#btnSubmit.btn.btn-primary.ng-cloak(type="submit", ng-disabled="addResourceServer.serverName.$invalid || addResourceServer.serverUser.$invalid || addResourceServer.serverUrl.$invalid") Submit
+include ../shared/footer
+//
+   Created by nmu on 13/04/2015.
+

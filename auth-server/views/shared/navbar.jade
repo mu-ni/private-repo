@@ -1,0 +1,28 @@
+div.navbar.navbar-fixed-top
+    div.container-fluid
+        ul.nav.pull-left
+            a.navbar-brand(href="/profile/#{user.username}") Profile
+        ul.nav.pull-left
+            a.navbar-brand(href="/resource") Resources
+        ul.nav.pull-left
+            a.navbar-brand(href="/client") Clients
+        ul.nav.pull-left
+            a.navbar-brand(href="/permission") Permissions
+        ul.nav.pull-left
+            a.navbar-brand(href="/resource-server") Resource Server
+        ul.nav.pull-left.hidden-md.hidden-sm.hidden-xs
+            a.navbar-brand(href="/token_pat") Tokens_pat
+        ul.nav.pull-left.hidden-md.hidden-sm.hidden-xs
+            a.navbar-brand(href="/token_aat") Tokens_aat
+        ul.nav.pull-left.hidden-md.hidden-sm.hidden-xs
+            a.navbar-brand(href="/token_rpt") Tokens_rpt
+        ul.nav.pull-left.hidden-md.hidden-sm.hidden-xs
+            a.navbar-brand(href="/ticket") Tickets
+        ul.nav.pull-left.hidden-lg
+            a.navbar-brand.token(href="#") Tokens
+                span.caret
+        a.btn.btn-primary.sign-out(href="/logout") Logout
+        include flyout
+
+//   Created by nmu on 23/03/2015.
+

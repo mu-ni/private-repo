@@ -1,0 +1,43 @@
+include ../shared/header
+include ../shared/navbar
+block content
+    h1 #{title}
+    p(style="color:red") #{error}
+    a#MergeClients.btn.btn-success.token-exp Merge Clients
+    table.table.table-striped.table-hover
+        tr
+            th #
+            th Name
+            th Type
+            th.hidden-md.hidden-sm.hidden-xs Url
+            th Resource Server
+            th Operations
+            //- var titles=["#","Name","Type","Url","ResourceServer","Operations"]
+            //each title in titles
+                th(style="padding:3px 10px") #{title}
+        tbody
+            each client, i in clientList
+                form#formClient(name="client",method="post",action="/client/#{client._id}?_method=DELETE")
+                    tr
+                        td.merge(style="display:none")
+                            input(type='checkbox' name='mergeCheck' value="#{client._id}")
+                        td.index #{i+1}
+                        td #{client.clientName}
+                        td #{client.clientType}
+                        td.hidden-md.hidden-sm.hidden-xs #{client.clientUrl}
+                        td.resourceServer #{client.resourceServer}
+                        //- var clis=[client.clientName,client.clientType,client.clientUrl,client.serverName]
+                        //each cli in clis
+                            td #{cli}
+                        //td #{serverNames[i]}
+                        td
+                            //a.btn.btn-warning.hidden-md.hidden-sm.hidden-xs(href="/clientPermission/#{client._id}" style="margin-right:5px") Permission
+                            a.btn.btn-success(href="/client/#{client._id}" style="margin-right:5px") Edit
+                            button#btnSubmit.btn.btn-danger(type="submit" style="margin-right:5px" onclick="return confirm('Are you sure to delete this client?');") Delete
+                            //a.btn.btn-danger(href="/deleteClient/#{client._id}" onclick="return confirm('Are you sure to delete this client?');") Delete
+    div#ButtonContainer
+        a#AddClient.btn.btn-primary(href="/addClient") Add Client
+include ../shared/footer
+//
+   Created by nmu on 01/04/2015.
+

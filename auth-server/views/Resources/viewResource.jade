@@ -1,0 +1,47 @@
+include ../shared/header
+include ../shared/navbar
+block content
+    h1 #{title}
+    h3 Resource properties
+    hr
+    form
+        div.form-group
+            label.col-sm-2.control-label Name
+            div.col-sm-10
+                p #{view_res.resourceName}
+        div.form-group
+            label.col-sm-2.control-label Type
+            div.col-sm-10
+                p #{view_res.resourceType}
+        div.form-group
+            label.col-sm-2.control-label Address
+            div.col-sm-10
+                p #{view_res.resourceUrl}
+        div.form-group
+            label.col-sm-2.control-label Resource Server
+            div.col-sm-10
+                p #{server.serverName}
+    h3 Attributes
+    hr
+    table.table.table-bordered(style="background-color : #f7f7f7")
+        thead
+            tr
+                - var titles=["#","Attribute Name","Attribute Type","Attribute Value"]
+                each title in titles
+                    th #{title}
+        tbody
+            each attribute , i in view_res.attributes
+                tr
+                    td #{i+1}
+                    td #{attribute.name}
+                    td #{attribute.type}
+                    td #{attribute.value}
+    h3 Related Subresources
+    hr
+    //if (subObject)
+    p No subobject at this moment
+    a.btn.btn-primary(href="/resource") Back
+include ../shared/footer
+//
+   Created by nmu on 07/04/2015.
+

@@ -1,0 +1,81 @@
+include ../shared/header
+include ../shared/navbar
+block content
+    h1 #{title}
+    h3 Client properties
+    hr
+    form#formEditClient(name="editClient",method="post",action="/client/#{edit_cli._id}?_method=PUT",ng-app="angularApp",ng-init="clientName='#{edit_cli.clientName}';clientType='#{edit_cli.clientType}'")
+        div.form-group
+            div.form-group
+            label.col-sm-2.control-label Name
+            div.col-sm-6
+                input#ClientName.form-control(name="clientName", ng-model="clientName",required)
+            div.col-sm-4
+                span.ng-cloak(style="color:red;line-height:34px", ng-show="editClient.clientName.$dirty && editClient.clientName.$invalid") Client Name is required.
+        div.form-group
+            label.col-sm-2.control-label Type
+            div.col-sm-6
+                input#ClientType.form-control(name="clientType", ng-model="clientType",required)
+            div.col-sm-4
+                span.ng-cloak(style="color:red;line-height:34px", ng-show="editClient.clientType.$dirty && editClient.clientType.$invalid") Client Type is required.
+        div.form-group
+            label.col-sm-2.control-label Token Type
+            div.col-sm-6
+                select#TokenType.form-control(name="tokenType")
+                    -var types=["password","certificate"]//angular
+                    each type in types
+                        if (type === edit_cli.tokenType)
+                            option(selected="selected") #{type}
+                        else
+                            option #{type}
+        div.form-group
+            label.col-sm-2.control-label PIN Code
+            div.col-sm-6
+                input#PinCode.form-control(name="pinCode", value="#{edit_cli.pinCode}", readonly)
+        div.form-group
+        div.form-group
+            label.col-sm-2.control-label URL
+            div.col-sm-6
+                input#ClientUrl.form-control(name="clientUrl", value="#{edit_cli.clientUrl}", readonly)
+        a.btn.btn-default(style="margin-right:5px" href="/client") Back
+        button#btnSubmit.btn.btn-primary(type="submit", ng-disabled="editClient.clientName.$invalid ||editClient.clientType.$invalid") Update
+    h3 Resource Server
+    hr
+    table.table.table-bordered(style="background-color : #f7f7f7")
+        thead
+            tr
+                - var titles=["#","Resource Server","Client Name","Client Type","ID in Server","Username"]
+                each title in titles
+                    th #{title}
+        tbody
+            each server , i in edit_cli.resourceServer
+                tr
+                    td #{i+1}
+                    td #{server.serverName}
+                    td #{server.clientName}
+                    td #{server.clientType}
+                    td #{server.id}
+                    td #{server.username}
+    h3 Secret
+    hr
+    form
+        div.form-group
+            label.col-sm-2.control-label Client ID
+            div.col-sm-10
+                p #{edit_cli.clientId}
+        div.form-group
+            label.col-sm-2.control-label Client Secret
+            div.col-sm-10
+                p #{edit_cli.clientSecret}
+        div.form-group
+            label.col-sm-2.control-label Token Type
+            div.col-sm-10
+                p #{edit_cli.tokenType}
+        //div.form-group
+            label.col-sm-2.control-label Security Bootstrap
+            div.col-sm-10
+                p Yes/No
+include ../shared/footer
+//
+   Created by nmu on 07/04/2015.
+

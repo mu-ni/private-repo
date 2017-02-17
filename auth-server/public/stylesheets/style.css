@@ -1,0 +1,103 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+.header,.footer{
+    font-size: 25px;
+    color: #ffffff;
+    background-color: #f2dede;
+    padding: 5px 20px;
+}
+.navbar-fixed-top{
+    background-color: #f2dede;
+}
+.pull-left{
+    padding:0px 20px;
+}
+.navbar-brand,
+.btn-primary a{
+    color:#fff;
+}
+.sign-out{
+    position:absolute;
+    top:5px;
+    right: 20px;
+}
+.token-exp{
+    position:absolute;
+    top:80px;
+    right: 50px;
+}
+.form-group{
+    overflow:hidden;
+}
+.well{
+    margin-top: 30px;
+}
+#profileForm .form-control{
+    width: 80%;
+}
+
+.flyout{
+    position: absolute;
+    left: 577px;
+    top: 50px;
+    background-color: #f2dede;
+    opacity: 0.8;
+    padding: 10px;
+    display: none;
+}
+
+.flyout ul{
+    margin: 0;
+}
+
+.caret{
+    position: absolute;
+    color: #fff;
+    top: 25px;
+}
+
+.flyout a{
+    color: #fff;
+    font-size: 18px;
+    line-height: 30px;
+}
+
+.flyout a:hover{
+    text-decoration: none;
+}
+
+.ng-cloak{display:none;}
+
+@media(max-width: 1199px) and (min-width: 992px){
+
+}
+
+@media(max-width: 767px){
+    .sign-out{
+        right: 10px;
+    }
+
+    .navbar-fixed-top .pull-left{
+        padding: 0;
+    }
+    .navbar-fixed-top .navbar-brand{
+        font-size: 14px;
+        padding: 10px;
+        line-height: 30px;
+    }
+
+    .flyout{
+        left: 435px;
+    }
+
+    .flyout a{
+        font-size: 14px;
+    }
+}

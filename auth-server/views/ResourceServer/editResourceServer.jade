@@ -1,0 +1,78 @@
+include ../shared/header
+include ../shared/navbar
+block content
+    h1 #{title}
+    form#formEditResourceServer(name="editResourceServer",method="post",action="/resource-server/#{edit_server._id}?_method=PUT",ng-app="angularApp",ng-init="serverName='#{edit_server.serverName}';serverUser='#{edit_server.serverUser}';serverUrl='#{edit_server.serverUrl}'")
+        div.form-group
+            label.col-sm-2.control-label Resource Server Name
+            div.col-sm-6
+                input#serverName.form-control(name="serverName", ng-model="serverName",required)
+            div.col-sm-4
+                span.ng-cloak(style="color:red;line-height:34px", ng-show="editResourceServer.serverName.$dirty && editResourceServer.serverName.$invalid") Server Name is required.
+        div.form-group
+            label.col-sm-2.control-label Resource Server User
+            div.col-sm-6
+                input#serverUser.form-control(name="serverUser", ng-model="serverUser",required)
+            div.col-sm-4
+                span.ng-cloak(style="color:red;line-height:34px", ng-show="editResourceServer.serverUser.$dirty && editResourceServer.serverUser.$invalid") Server User is required.
+        div.form-group
+            label.col-sm-2.control-label Resource Server URL
+            div.col-sm-6
+                input#serverUrl.form-control(name="serverUrl", ng-model="serverUrl",required)
+            div.col-sm-4
+                span.ng-cloak(style="color:red;line-height:34px", ng-show="editResourceServer.serverUrl.$dirty && editResourceServer.serverUrl.$invalid") Server URL is required.
+        div.form-group
+            label.col-sm-2.control-label Scope
+            div.col-sm-10
+                - var scopes = ["uma_protection:resource", "uma_protection:client", "uma_protection:permission"]
+                - var c = [];
+                each scope,index in scopes
+                    if(!edit_server.scope)
+                        span(style="display :none") #{c[index]=0}
+                    else
+                        each sco in edit_server.scope
+                            if (scope === sco)
+                                span(style="display :none") #{c[index]=1}
+                                - break;
+                            else
+                                span(style="display :none") #{c[index]=0}
+                each scope,index in scopes
+                    li.list-unstyled(style="float:left; margin-left:10px")
+                        if (c[index]===1)
+                            input#Scope(type="checkbox", name="scope",value="#{scope}", checked)
+                            span(style="margin-right:10px") #{scope}
+                        else
+                            input#Scope(type="checkbox", name="scope",value="#{scope}")
+                            span(style="margin-right:10px") #{scope}
+        div.form-group
+            label.col-sm-2.control-label Status
+            div.col-sm-10
+                if (edit_server.status===true)
+                    input#checkStatus(type="checkbox" name="status" value="true" checked="checked")
+                else
+                    input#checkStatus(type="checkbox" name="status" value="true")
+        div.form-group
+            label.col-sm-2.control-label UMA Compliant
+            div.col-sm-10
+                if (edit_server.umaCompliant===true)
+                    input#checkUMA(type="checkbox" name="umaCompliant" value="true" checked="checked")
+                else
+                    input#checkUMA(type="checkbox" name="umaCompliant" value="true")
+        div.form-group
+            label.col-sm-2.control-label Client ID
+            div.col-sm-5
+                p#client_id #{edit_server.clientId}
+            //div.col-sm-5
+                a.btn.btn-success(href="/") Reset
+        div.form-group
+            label.col-sm-2.control-label Client Secret
+            div.col-sm-5
+                p#client_secret #{edit_server.clientSecret}
+            div.col-sm-5
+                a.btn.btn-sm.btn-success.reset(href="#") Reset
+        a.btn.btn-default(style="margin-right:5px" href="/resource-server") Cancel
+        button#btnSubmit.btn.btn-primary(type="submit", ng-disabled="editResourceServer.serverName.$invalid ||editResourceServer.serverUser.$invalid ||editResourceServer.serverUrl.$invalid") Update
+include ../shared/footer
+//
+   Created by nmu on 13/04/2015.
+

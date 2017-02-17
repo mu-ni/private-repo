@@ -1,0 +1,10 @@
+include shared/header
+div.header Gemalto Oauth
+block content
+    h1= title
+    span Welcome to #{title}, Please&nbsp
+        a.btn(href="/login" style="padding:0") Login&nbsp
+    span or&nbsp
+        a.btn(href="/signup" style="padding:0") Signup
+div.footer Security to be free
+include shared/footer

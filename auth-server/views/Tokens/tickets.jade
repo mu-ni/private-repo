@@ -1,0 +1,40 @@
+include ../shared/header
+include ../shared/navbar
+block content
+    h1 #{title}
+    a.btn.btn-success.token-exp(href="/token-exp") Set Ticket Lifetime
+    table.table.table-striped.table-hover
+        tr
+            th #
+            th Ticket
+            th.hidden-sm.hidden-xs Object Type
+            th.hidden-sm.hidden-xs Object ID
+            th.hidden-xs Lifetime
+            th.hidden-md.hidden-sm.hidden-xs Expired Date
+            th.hidden-xs Scope
+            th.hidden-md.hidden-sm.hidden-xs Related Token
+            th Operations
+            //- var titles=["#","Ticket","Object ID","Object Type","Created Date","Lifetime","Expired Date","Scope","Related Token","Operations"]
+            //each title in titles
+                th(style="padding:3px 10px") #{title}
+        tbody
+            each ticket, i in ticketList
+                form#formTicket(name="ticket",method="post",action="/ticket/#{ticket._id}?_method=DELETE")
+                    tr
+                        td #{i+1}
+                        td(style="max-width:200px;overflow:hidden;text-overflow:ellipsis") #{ticket.ticket}
+                        td.hidden-sm.hidden-xs #{ticket.object_type}
+                        td.hidden-sm.hidden-xs #{ticket.object_id}
+                        td.hidden-xs #{ticket.lifetime}
+                        td.hidden-md.hidden-sm.hidden-xs #{ticket.expiredDate}
+                        td.hidden-xs #{ticket.scope}
+                        td.hidden-md.hidden-sm.hidden-xs(style="max-width:200px;overflow:hidden;text-overflow:ellipsis") #{ticket.relatedToken}
+                        //- var tickets=[i+1,ticket.ticket,ticket.object_id,ticket.object_type,ticket.createdDate,ticket.lifetime,ticket.expiredDate,ticket.scope,ticket.relatedToken]
+                        //each ticket in tickets
+                            td(style="max-width:200px;overflow:hidden;text-overflow:ellipsis") #{ticket}
+                        td
+                            button#btnSubmit.btn.btn-danger(type="submit" onclick="return confirm('Are you sure to delete this ticket?');") Delete
+include ../shared/footer
+//
+   Created by nmu on 08/06/2015.
+

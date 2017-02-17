@@ -1,0 +1,30 @@
+include shared/header
+include shared/navbar
+block content
+    form#changePswForm.well(name="changePswForm",method="post",action="/changePassword/#{user.username}?_method=PUT",onSubmit="return checkChangePsw();")
+        h1 #{title}
+        hr
+        p(style="color:red") #{error}
+        p(style="color:green") #{message}
+        div.form-group
+            label.control-label.col-sm-2 Old Password
+            div.col-sm-10
+                input#password.form-control(type="password",name="password")
+        div.form-group
+            label.control-label.col-sm-2 New Password
+            div.col-sm-10
+                input#newPassword.form-control(type="password",name="newPassword")
+        div.form-group
+            label.control-label.col-sm-2 Repeat New Password
+            div.col-sm-10
+                input#reNewPassword.form-control(type="password",name="reNewPassword")
+        hr
+        div.form-group
+            label.control-label.col-sm-2
+            div.col-sm-10
+                a.btn.btn-default(style="margin-right:5px" href="/profile/#{user.username}") Cancel
+                button.btn.btn-primary(type="submit") Change
+include shared/footer
+//
+   Created by nmu on 20/04/2015.
+

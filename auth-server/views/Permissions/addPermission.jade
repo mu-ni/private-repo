@@ -1,0 +1,33 @@
+include ../shared/header
+include ../shared/navbar
+block content
+    h1 #{title}
+    form#formAddPermission(name="addPermission",method="post",action="/permission")
+        div.form-group(style="display:none")
+            label.col-sm-2.control-label Id
+            div.col-sm-10
+                input#id.form-control(name="id", value="#{id}",readonly)
+        div.form-group
+            label.col-sm-2.control-label Resource
+            div.col-sm-10
+                select#resource.form-control(name="resource")
+                    each resource in resourceList
+                        option(value="#{resource._id}") #{resource.resourceName}
+        div.form-group
+            label.col-sm-2.control-label Client
+            div.col-sm-10
+                select#client.form-control(name="client")
+                    each client in clientList
+                        option(value="#{client._id}") #{client.clientName}
+        div.form-group
+            label.col-sm-2.control-label Actions
+            div#showActions.col-sm-10
+                each action in resourceList[0].actions
+                    input#Actions(type="checkbox", name="actions",value="#{action}")
+                    span(style="margin-right:10px") #{action}
+        a.btn.btn-default(style="margin-right:5px" href="/permission") Cancel
+        button#btnSubmit.btn.btn-primary(type="submit") Submit
+include ../shared/footer
+//
+   Created by nmu on 07/04/2015.
+

@@ -1,0 +1,26 @@
+include shared/header
+div.header Gemalto
+block content
+    div.container-fluid
+        form#loginForm.form-horizontal(name="loginForm",method="post",action="/login",onSubmit="return checkLogin();")
+            legend Auth Server Login
+            p(style="color:red") #{error}
+            p(style="color:green") #{message}
+            div.form-group
+                label.control-label.col-sm-2(for = "username") User Name
+                div.col-sm-10
+                    input#username.input-lg(type="text",name="username")
+            div.form-group
+                label.control-label.col-sm-2(for = "password") Password
+                div.col-sm-10
+                    input#password.input-lg(type="password",name="password")
+            div.form-group
+                label.control-label.col-sm-2
+                div.col-sm-10
+                    a.btn.btn-default(style="margin-right:5px" href="/") Cancel
+                    button.btn.btn-primary(type="submit") Login
+div.footer Security to be free
+include shared/footer
+//
+   Created by nmu on 01/04/2015.
+

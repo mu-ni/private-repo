@@ -1,0 +1,44 @@
+include shared/header
+include shared/navbar
+block content
+    form#profileForm.well(name="profileForm",method="post",action="/profile/#{user.username}?_method=PUT",onSubmit="return checkProfile();")
+        h1 #{title}
+        hr
+        p(style="color:red") #{error}
+        p(style="color:green") #{message}
+        div.form-group
+            label.control-label.col-sm-2 User Name
+            div.col-sm-10
+                input#username.form-control(type="text",name="username",readonly,value="#{user.username}")
+        div.form-group
+            label.control-label.col-sm-2 Password
+            div.col-sm-10
+                a.btn.btn-danger(href="/changePassword/#{user.username}") Change
+                //input#password.form-control(type="password",name="password")
+        hr
+        div.form-group
+            label.control-label.col-sm-2 Name
+            div.col-sm-10
+                input#name.form-control(name="name",value="#{user.name}")
+        div.form-group
+            label.control-label.col-sm-2 Email
+            div.col-sm-10
+                input#email.form-control(name="email",value="#{user.email}")
+        div.form-group
+            label.control-label.col-sm-2 Country
+            div.col-sm-10
+                select#Country.form-control(name="country")
+                    -var countries=["France","US","UK"]
+                    each country in countries
+                        if (country === user.country)
+                            option(selected="selected") #{country}
+                        else
+                            option #{country}
+        hr
+        div.form-group
+            label.control-label.col-sm-2
+            div.col-sm-10
+                button.btn.btn-primary(type="submit") Update
+include shared/footer
+//
+   Created by nmu on 18/03/2015.

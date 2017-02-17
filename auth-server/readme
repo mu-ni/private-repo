@@ -1,0 +1,368 @@
+/********************************/
+/**********Start server**********/
+/********************************/
+
+////////////////////////////////
+//////commands for start////////
+////////////////////////////////
+
+//nodejs : v0.10.37
+//npm : 2.7.6
+//mongo : 2.4.9
+
+step1. install nodejs & npm
+    sudo apt-get install software-properties-common
+    sudo add-apt-repository ppa:chris-lea/node.js
+    sudo apt-get update
+    sudo apt-get install nodejs
+    sudo apt-get install npm
+
+//reference1 : http://tecadmin.net/install-latest-nodejs-npm-on-ubuntu/
+//reference2 : http://sysads.co.uk/2014/05/install-latest-node-js-npm-ubuntu-14-04-13-10/
+
+step2. install mongodb
+    sudo apt-get install mongodb
+//reference : http://www.mongodbspain.com/en/2014/08/30/install-mongodb-on-ubuntu-14-04/
+
+step3. install git :
+    sudo apt-get install git
+
+step4. clone the project from bitbucket :
+    git clone https://muni-gto@bitbucket.org/sunseetilas/auth-server.git
+
+step5. enter the folder :
+    (for example: cd auth-server/)
+
+step6. start the server :
+    nodejs bin/www
+
+step7. stop the server :
+    CTRL + C
+
+////////////////////////////////
+/////commands for screen////////
+////////////////////////////////
+
+//If you want to keep the server running after closing the console window. Use the tool "screen".
+
+Install screen :
+    sudo apt-get install screen
+
+Start the server :
+    screen nodejs bin/www (ensure you are in the project folder)
+
+Back without stopping server :
+    CTRL + A + D
+
+List all screens :
+    screen -ls
+
+Quit the screen :
+    screen -S $NUM -X quit (ex. screen -S 123456 -X quit)
+
+Enter the screen :
+    screen -r $NUM (ex. screen -r 123456)
+
+Stop this screen :
+    CTRL + C
+
+
+////////////////////////////////
+/////commands for mongodb///////
+////////////////////////////////
+
+Enter the mongodb :
+    mongo
+
+Show all databases :
+    show dbs
+
+Switch to one db :
+    use $DB_NAME
+
+Show all collections :
+    show collections
+
+List all data of the collection :
+    db.$COLLECTION_NAME.find().pretty()  (ex. db.resources.find().pretty())
+
+Drop the collection :
+    db.$COLLECTION_NAME.drop()  (ex. db.resources.drop())
+
+//Database visualization software - MongoVUE
+//for more commands about mongodb, please visit : http://docs.mongodb.org/manual/reference/mongo-shell/
+
+/********************************/
+/******Function dictionary*******/
+/********************************/
+
+////////////////////////////////
+/////////for resource///////////
+////////////////////////////////
+
+function findResource(query, callback) {
+    //query is a json in {} like: {_user : "muni"}
+    //check if result is empty, if yes callback error
+    //callback is all resource objects in an array
+};
+
+function findOneResource(query, callback) {
+    //query is a json in {} like: {_user : "muni"}
+    //check if result exist, if no callback error
+    //callback is a resource object
+};
+
+//add server name for resource
+function addServerNameRes(resource, callback) {
+    //resource is an object
+    //callback is null but the original resource object with resourceServer's name added
+};
+
+////////////////////////////////
+///////////for client///////////
+////////////////////////////////
+
+function findClient(query, callback) {
+    //query is a json in {} like: {_user : "muni"}
+    //check if result is empty, if yes callback error
+    //callback is all client objects in an array
+};
+
+function findOneClient(query, callback) {
+    //query is a json in {} like: {_user : "muni"}
+    //check if result exist, if no callback error
+    //callback is a client object
+};
+
+//find the specific server in client's resource server array
+function findOneServerInClient(client, serverId, callback) {
+    //client is an object, serverId is a string
+    //traversal all resource servers of this client, find the specific one
+    //callback is a specific server json, like: {id : "123", serverId : "456", username : "muni"}
+};
+
+//add server name for clients
+function addServerNameCli(client, callback) {
+    //client is an object
+    //callback is  null but the original client object with resourceServer's name set added
+};
+
+//add server name when edit client
+function addServerNameEditCli(serverSet,callback){
+    //serverSet is a set of server of ONE client
+    //callback is null but the original client object,its attribute serverSet with resourceServer's name added
+}
+
+////////////////////////////////
+//////for resource server///////
+////////////////////////////////
+
+function findServer(query, callback) {
+    //query is a json in {} like: {_user : "muni"}
+    //check if result is empty, if yes callback error
+    //callback is all resource server objects in an array
+};
+
+function findActiveServer(username, callback) {
+    //username is a string
+    //find all active PATs, then find related resource server using pat.object_id
+    //callback is an active resource server array
+};
+
+function findOneServer(query, callback) {
+    //query is a json in {} like: {_user : "muni"}
+    //check if result exist, if no callback error
+    //callback is a resource server object
+};
+
+//use ticket to find server
+function ticketFindServer(ticket, callback) {//ticket is a string
+    //ticket is a string
+    //ticket has relatedToken(PAT id), find the specific PAT
+    //using PAT to find the specific resource server
+    //callback is a resource server object
+};
+
+//find profile of resource server(server.tokenDescriptors set)
+function findProfile(pat,callback) {
+    //pat is a string, from res.body(from resource server)
+    //using pat to find the specific resource server
+    //get resource server's tokenDescriptors as profiles
+    //callback profiles(array)
+};
+
+////////////////////////////////
+/////////for permission/////////
+////////////////////////////////
+
+function findPermission(query, callback) {
+    //query is a json in {} like: {_user : "muni"}
+    //check if result is empty, if yes callback error
+    //callback is all permission objects in an array
+};
+
+function findOnePermission(query, callback) {
+    //query is a json in {} like: {_user : "muni"}
+    //check if result exist, if no callback error
+    //callback is a permission object
+};
+
+//check permission unique
+function checkPermission(resourceID, clientID, callback) {
+    //username, resourceID, clientID are string
+    //check if the permission with this resourceId-clientId exist
+    //callback is the permission object
+};
+
+//add Resource and Client Name for permission
+function addResCliName(permission, callback) {
+    //permission is an object
+    //callback is null but the original permission object with resourceName&clientName added
+};
+
+//check scope in permission
+function checkScope(permission, scope, callback) {
+    //permission is an object, scope comes from the ticket
+    //check if all scope match the actions of permission
+    //if all matched callback true, else callback error
+};
+
+////////////////////////////////
+////////////for AAT/////////////
+////////////////////////////////
+
+//create and return aat
+function createAAT(client,scope,callback) {
+    //client is an object, scope is from req.body.scope(from resource server)
+    //find lifetime from the lifetime collection
+    //callback is a new AAT object
+};
+
+//check and return aat
+function checkAAT(query, callback) {
+    //query is a json in {} like: {_user : "muni"}
+    //check if the AAT is exist and expired
+    //callback is this AAT object
+};
+
+////////////////////////////////
+////////////for PAT/////////////
+////////////////////////////////
+
+//find pat, not check, for refresh
+function findOnePAT(query, callback) {
+    //query is a json in {} like: {_user : "muni"}
+    //check if result exist, if no callback error
+    //callback is a PAT object
+};
+
+//check and return pat
+function checkPAT(query, callback) {
+    //query is a json in {} like: {_user : "muni"}
+    //check if the PAT is exist and expired
+    //callback is this PAT object
+};
+
+//check pat for every server
+function checkPATs(query, callback) {////after only display active resource server in add client UI, remove it
+    //when add client and check multiple resource server, use it to check PAT of each resource server
+    //query is a json in {} like: {_user : "muni"}
+    //check if these PATs are exist and expired
+    //callback are these PAT objects
+};
+
+////////////////////////////////
+////////////for RPT/////////////
+////////////////////////////////
+
+//create and return rpt
+function createRPT(user,object_id,object_type,scope,callback){
+    //user is a string, object_id & object_type & scope are from ticket or sth else
+    //find lifetime from the lifetime collection
+    //callback is a new RPT object
+}
+
+//check and return rpt
+function checkRPT(query, callback) {
+    //query is a json in {} like: {_user : "muni"}
+    //check if the RPT is exist and expired
+    //callback is this RPT object
+};
+
+////////////////////////////////
+//////////for Ticket////////////
+////////////////////////////////
+
+function createTicket(pat,object_id,object_type,scope,callback) {
+    //pat is an object, object_id & object_type & scope are from req.body(from resource server)
+    //find lifetime from the lifetime collection
+    //callback is a new ticket object
+};
+
+//check and return ticket
+function checkTicket(query, callback) {
+    //query is a json in {} like: {_user : "muni"}
+    //check if the Ticket is exist and expired
+    //callback is this Ticket object
+};
+
+////////////////////////////////
+//////////for lifetime//////////
+////////////////////////////////
+
+//use username and type to find lifetime
+function findLifetime(query, callback) {
+    //query is a json in {} like: {_user : "muni"}
+    //check if result exist, if no callback error
+    //callback is this lifetime object
+};
+
+////////////////////////////////
+////////////for files///////////
+////////////////////////////////
+
+function checkFileExist(file, callback) {
+    //file is a path
+    //if exist callback null, else callback error
+};
+
+function CSRtoCRT(csr, callback) {
+    //csr is a string from req.body
+    //callback is a crt file in string(signed)
+};
+
+////////////////////////////////
+////////////for https///////////
+////////////////////////////////
+
+//generate randomString
+function randomString(len) {
+    //len is the length of the random string
+    //return is a random string
+};
+
+function discovery(server, callback) {
+    //server is an object
+    //using https POST request to get the /discovery response of the server
+    //callback is a json
+};
+
+function separateURL(URL, callback) {
+    //URL is a string
+    //result is the host,port,path of the URL
+    //callback is a json
+};
+
+function getURL(server,endpoint,callback) {
+    //server is an object, endpoint is a string
+    //callback is the URL of the endpoint in this server
+}
+
+function httpsFunc(method,data,URL,rptToken,callback) {
+    //method is a string like: 'POST', 'GET', 'PUT', 'DELETE'
+    //data is the req.body of this https request
+    //URL is a json, with host, port, path included
+    //rptToken is a string
+    //if response.statusCode callback { result: 'OK' }, else callback error
+};
+

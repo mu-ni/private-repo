@@ -1,0 +1,44 @@
+include ../shared/header
+include ../shared/navbar
+block content
+    h1 #{title}
+    form#formAddClient(name="addClient",method="post",action="/client",ng-app="angularApp")
+        div.form-group(style="display:none")
+            label.col-sm-2.control-label Id
+            div.col-sm-10
+                input#id.form-control(name="id", value="#{id}")
+        div.form-group
+            label.col-sm-2.control-label Name
+            div.col-sm-6
+                input#ClientName.form-control(name="clientName", placeholder="Client Name", ng-model="clientName", required)
+            div.col-sm-4
+                span.ng-cloak(style="color:red;line-height:34px", ng-show="addClient.clientName.$dirty && addClient.clientName.$invalid") Client Name is required.
+        div.form-group
+            label.col-sm-2.control-label Type
+            div.col-sm-6
+                input#ClientType.form-control(name="clientType", placeholder="Client Type", ng-model="clientType", required)
+            div.col-sm-4
+                span.ng-cloak(style="color:red;line-height:34px", ng-show="addClient.clientType.$dirty && addClient.clientType.$invalid") Client Type is required.
+        div.form-group
+            label.col-sm-2.control-label Token Type
+            div.col-sm-6
+                select#TokenType.form-control(name="tokenType")
+                    -var types=["password","certificate"]//angular
+                    each type in types
+                        option #{type}
+        div.form-group#showPinCode(style="display:none")
+            label.col-sm-2.control-label PIN Code
+            div.col-sm-6
+                input#PinCode.form-control(name="pinCode", placeholder="PIN Code", ng-model="pinCode")
+        div.form-group
+            label.col-sm-2.control-label ResourceServer
+            div.col-sm-10
+                each server in serverList
+                    input#ResourceServer(type="checkbox", name="serverId",value="#{server._id}")
+                    span(style="margin-right:10px") #{server.serverName}
+        a.btn.btn-default(style="margin-right:5px" href="/client") Cancel
+        button#btnSubmit.btn.btn-primary.ng-cloak(type="submit", ng-disabled="addClient.clientName.$invalid ||addClient.clientType.$invalid") Submit
+include ../shared/footer
+//
+   Created by nmu on 10/06/2015.
+

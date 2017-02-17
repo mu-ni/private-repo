@@ -1,0 +1,44 @@
+include ../shared/header
+include ../shared/navbar
+block content
+    h1 #{title}
+    p(style="color:red") #{error}
+    a#ResourceSet.btn.btn-success.token-exp Add Resource Set
+    table.table.table-striped.table-hover
+        tr
+            th #
+            th Name
+            th Type
+            th ResourceServer
+            th.hidden-xs ResourceServer ID
+            th.hidden-sm.hidden-xs Action
+            th.hidden-md.hidden-xs Attribute
+            th Operations
+            //- var titles=["#","Name","Type","ResourceServer","ResourceServer Id","Action Set","Actions","Attributes","Operations"]
+            //each title in titles
+                th(style="padding:3px 10px") #{title}
+        tbody
+            each resource, i in resourceList
+                form#formResource(name="resource",method="post",action="/resource/#{resource._id}?_method=DELETE")
+                    tr
+                        //- var ress=[i+1,resource.resourceName,resource.resourceType,resource.resourceServer,resource.server_id,resource.actionName,resource.actions,resource.attributeName]
+                        //each res in ress
+                            td #{res}
+                        td.resourceSet(style="display:none")
+                            input(type='checkbox' name='setCheck' value="#{resource._id}")
+                        td.index #{i+1}
+                        td #{resource.resourceName}
+                        td #{resource.resourceType}
+                        td #{resource.resourceServer}
+                        td.hidden-xs #{resource.server_id}
+                        td.hidden-sm.hidden-xs #{resource.actions}
+                        td.hidden-md.hidden-sm.hidden-xs #{resource.attributeName}
+                        td
+                            a.btn.btn-success(href="/resource/#{resource._id}" style="margin-right:5px") View
+                            button#btnSubmit.btn.btn-danger(type="submit" style="margin-right:5px" onclick="return confirm('Are you sure to delete this resource?');") Delete
+                            //a.btn.btn-danger(href="/deleteResource/#{resource._id}" style="margin-right:5px" onclick="return confirm('Are you sure to delete this resource?');") Delete
+    div#ButtonContainer
+include ../shared/footer
+//
+   Created by nmu on 01/04/2015.
+

@@ -1,0 +1,38 @@
+include ../shared/header
+include ../shared/navbar
+block content
+    h1 #{title}
+    //form#formMergeClient(name="mergeClient",method="post",action="/merge-clients",onSubmit="return isEmpty();")
+        div.form-group(style="display:none")
+            label.col-sm-2.control-label Id
+            div.col-sm-10
+                input#id.form-control(name="id", value="#{id}")
+        div.form-group
+            label.col-sm-2.control-label New Name
+            div.col-sm-10
+                input#ClientName.form-control(name="clientName", placeholder="New Client Name")
+        div.form-group
+            label.col-sm-2.control-label Type
+            div.col-sm-10
+                input#ClientType.form-control(name="clientType", value="#{type}" readonly)
+        div.form-group
+            label.col-sm-2.control-label ResourceServer
+            div.col-sm-10
+                each server in serverName
+                    span(style="margin-right:10px") #{server}
+        div.form-group(style="display:none")
+            label.col-sm-2.control-label ResourceServer Name
+            div.col-sm-10
+                each server in serverName
+                    input#ResourceServerName.form-control(name="serverName", value="#{server}")
+        div.form-group(style="display:none")
+            label.col-sm-2.control-label Remove ID
+            div.col-sm-10
+                each removeId in removeIdList
+                    input#RemoveID.form-control(name="removeId", value="#{removeId}")
+        a.btn.btn-default(style="margin-right:5px" href="/client") Cancel
+        button#btnSubmit.btn.btn-primary(type="submit") Submit
+include ../shared/footer
+//
+   Created by nmu on 25/06/2015.
+

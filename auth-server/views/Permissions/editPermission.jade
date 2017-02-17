@@ -1,0 +1,41 @@
+include ../shared/header
+include ../shared/navbar
+block content
+    h1 #{title}
+    form#formEditPermission(name="editPermission",method="post",action="/permission/#{edit_per._id}?_method=PUT")
+        div.form-group
+            label.col-sm-2.control-label Resource
+            div.col-sm-10
+                input#resource.form-control(name="resource", value="#{edit_per.resourceName}",readonly)
+        div.form-group
+            label.col-sm-2.control-label Client
+            div.col-sm-10
+                input#client.form-control(name="client", value="#{edit_per.clientName}",readonly)
+        div.form-group
+            label.col-sm-2.control-label Actions
+            div#actions.col-sm-10
+                - var c = [];
+                each action,index in resource.actions
+                    if (edit_per.actions)
+                        each act in edit_per.actions
+                            if (action === act)
+                                span(style="display :none") #{c[index]=1}
+                                - break;
+                            else
+                                span(style="display :none") #{c[index]=0}
+                    else
+                        - break;
+                //span #{c}
+                each action,index in resource.actions
+                    if (c[index]===1)
+                        input#Actions(type="checkbox", name="actions",value="#{action}", checked)
+                        span(style="margin-right:10px") #{action}
+                    else
+                        input#Actions(type="checkbox", name="actions",value="#{action}")
+                        span(style="margin-right:10px") #{action}
+        a.btn.btn-default(style="margin-right:5px" href="javascript:history.back()") Cancel
+        button#btnSubmit.btn.btn-primary(type="submit") Update
+include ../shared/footer
+//
+   Created by nmu on 09/04/2015.
+

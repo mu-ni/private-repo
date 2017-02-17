@@ -1,0 +1,15 @@
+include ../shared/header
+include ../shared/navbar
+block content
+    h1 #{title}
+    p Do you want to authorize this ResourceServer?
+    form#formAuth(name="auth",method="post",action="/dialog/authorize/decision")
+        //yes POST /auth/oauth/token
+        input(name="transaction_id" type="hidden" value="#{transactionID}")
+        input.btn.btn-success(type="submit" value="Allow" id="allow" style="margin-right:5px")
+        input.btn.btn-default(type="submit" value="Deny" name="cancel" id="deny")
+        //a.btn.btn-default(style="margin-right:5px" href="javascript:history.back()") Cancel
+        //button#btnSubmit.btn.btn-primary(type="submit") Refresh
+//
+   Created by nmu on 07/05/2015.
+

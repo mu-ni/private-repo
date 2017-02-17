@@ -1,0 +1,40 @@
+include ../shared/header
+include ../shared/navbar
+block content
+    h1 #{title}
+    table.table.table-striped.table-hover
+        tr
+            th #
+            th Resource
+            th.hidden-md.hidden-sm.hidden-xs ResourceID
+            th Client
+            th.hidden-md.hidden-sm.hidden-xs ClientID
+            th Scope
+            th.hidden-xs ResourceServer
+            th Operations
+            //- var titles=["#","Resource","ResourceID","Client","ClientID","Scope","ResourceServer","ResourceServer ID","Operations"]
+            //each title in titles
+                th(style="padding:3px 10px") #{title}
+        tbody
+            each permission, i in permissionList
+                form#formPermission(name="permission",method="post",action="/permission/#{permission._id}?_method=DELETE")
+                    tr
+                        td #{i+1}
+                        td #{permission.resourceName}
+                        td.hidden-md.hidden-sm.hidden-xs #{permission.resourceId}
+                        td #{permission.clientName}
+                        td.hidden-md.hidden-sm.hidden-xs #{permission.clientId}
+                        td #{permission.actions}
+                        td.hidden-xs #{permission.resourceServer}
+                        //- var pers=[i+1,permission.resource,permission.resourceId,permission.client,permission.clientId,permission.actions,permission.resourceServer,permission.server_id]
+                        //each per in pers
+                            td #{per}
+                        td
+                            a.btn.btn-success(href="/editPermission/#{permission._id}" style="margin-right:5px") Edit
+                            button#btnSubmit.btn.btn-danger(type="submit" style="margin-right:5px" onclick="return confirm('Are you sure to delete this permission?');") Delete
+                            //a.btn.btn-danger(href="/deletePermission/#{permission._id}" onclick="return confirm('Are you sure to delete this permission?');") Delete
+    a.btn.btn-primary(href="/addPermission") Add Permission
+include ../shared/footer
+//
+   Created by nmu on 01/04/2015.
+
