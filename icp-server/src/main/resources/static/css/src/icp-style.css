@@ -1,0 +1,143 @@
+body#index {
+    padding-top: 40px;
+    padding-bottom: 40px;
+    background-color: #eee;
+}
+
+.errmsg{
+    color: #cc0000;
+    float: right;
+}
+
+#signin .form-signin {
+    max-width: 330px;
+    padding: 15px;
+    margin: 0 auto;
+}
+
+#signin #signinBtn {
+    margin-top: 20px;
+}
+
+#main #header,
+#check #header {
+    overflow: hidden;
+    padding: 15px 0;
+}
+
+#main #reviewList {
+    width: 45%;
+    float: left;
+}
+
+#main #checkList {
+    width: 45%;
+    float: right;
+}
+
+#main .tbContainer {
+    min-height: 300px;
+    padding: 0 5px;
+    border: 1px solid #eee;
+    border-radius: 5px;
+}
+
+#main #reviewList .tbContainer {
+    background-color: cornsilk;
+}
+
+#main #checkList .tbContainer {
+    background-color: azure;
+}
+
+#main table{
+    margin: 0;
+    text-align: center;
+}
+
+#main table>thead>tr>th {
+    text-align: center;
+}
+
+#main #reviewList th,
+#main #checkList th} {
+    font-size: 7px;
+    text-align: center;
+}
+
+#main #reviewList tr,
+#main #checkList tr {
+    font-size: 7px;
+    cursor:pointer;
+}
+
+#main #reviewListNav,
+#main #checkListNav {
+    text-align: center;
+}
+
+#main #reviewListNav ul,
+#main #checkListNav ul{
+    margin: 10px 0;
+}
+
+#main #reviewListNav a,
+#main #checkListNav a{
+    font-size: 8px;
+    padding: 5px 10px;
+}
+
+#main .eclipsis a{
+}
+
+#main #header a,
+#check #header a {
+    margin: 15px 0;
+}
+
+#check #header #back {
+    margin: 0;
+    font-size: 10px;
+}
+
+#main #header #signout,
+#check #header #signout {
+    float: right;
+    margin: 0;
+    font-size: 10px;
+}
+
+#check #imgContainer {
+    width: 70%;
+    float: left;
+    padding: 10px;
+    border: 1px solid green;
+}
+
+#check #imgContainer img {
+    width: 100%;
+}
+
+#check #checkRst {
+    width: 30%;
+    float: right;
+    padding: 20px 30px;
+}
+
+#check #checkRst .btn-danger {
+    margin-left: 20px;
+}
+
+#check #checkRst ul {
+    list-style: none;
+    padding: 10px;
+    margin: 0;
+}
+
+#check #checkRst #reasonDiv {
+    display: none;
+}
+
+#check #checkRst .btn-default {
+    margin-left: 10px;
+}

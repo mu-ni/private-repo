@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>ICP-Image Check Platform signin</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/lib/bootstrap.min.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/src/icp-style.css}"/>
+    <script type="text/javascript" th:src="@{/js/lib/vue.min.js}" />
+</head>
+<body id = "index">
+    <!--p th:text="'Hello, ' + ${name} + '!'" />
+    <div id="app" class="container">
+        {{message}}
+    </div-->
+    <div id="signin" class="container">
+
+      <form class="form-signin" th:action="@{/signin}" th:object="${signin}" method="post">
+        <h2 class="form-signin-heading">Please sign in</h2>
+        <label for="inputUsername" class="sr-only">Username</label>
+        <input id="inputUsername" name="inputUsername" class="form-control" placeholder="Username" required = "true" autofocus = "true"></input>
+        <label for="inputPassword" class="sr-only">Password</label>
+        <input type="password" id="inputPassword" name="inputPassword" class="form-control" placeholder="Password" required = "true"></input>
+        <!--div class="checkbox">
+          <label>
+            <input type="checkbox" value="remember-me"> Remember me</input>
+          </label>
+      </div-->
+        <p class="errmsg" th:if="${error}">Authentication failed!</p>
+        <button id="signinBtn" class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+      </form>
+
+    </div> <!-- /container -->
+<script type="text/javascript" th:src="@{/js/src/icp-vue.js}" />
+</body>
+</html>
